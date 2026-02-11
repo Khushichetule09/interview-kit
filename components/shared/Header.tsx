@@ -9,6 +9,7 @@ import { useClickOutside } from "@/hooks/use-click-outside";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { PlaceholderLogo } from "@/components/ui/placeholder-logo";
 import Link from "next/link";
+import { ModeToggle } from "../ui/mode-toggle";
 
 // Defaults to Tailwind's md: breakpoint.
 // Change to 1024 + use lg: classes for 1024px breakpoint or whatever breakpoint you want to use
@@ -134,16 +135,12 @@ export function Header() {
 function ActionButtons() {
   return (
     <div className="flex flex-col gap-2 md:flex-row">
-      <Button variant="outline" className="w-full md:w-fit">
-        Login
-      </Button>
+      <ModeToggle />
     </div>
   );
 }
 
 const NAV_ITEMS = [
-  { label: "Products", href: "#" },
-  { label: "Solutions", href: "#" },
-  { label: "Pricing", href: "#" },
-  { label: "Company", href: "#" },
+  { label: "Questions", href: "/questions" },
+  { label: "AI Chatbot", href: "/ai" }
 ];

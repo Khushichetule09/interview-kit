@@ -22,6 +22,7 @@
     "hooks": "@/hooks"
   },
   "registries": {
-    "@shadcraft": "https://free.shadcraft.com/r/{name}.json"
+    "@shadcraft": "https://free.shadcraft.com/r/{name}.json",
+    "@kibo-ui": "https://www.kibo-ui.com/r/{name}.json"
   }
 }
