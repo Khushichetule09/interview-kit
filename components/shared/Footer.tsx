@@ -28,7 +28,7 @@ const socialLinks = [
     icon: <XIcon />,
   },
   {
-    href: "https://github.com/KhushiChetule09",
+    href: "https://github.com/KhushiChetule09/interview-kit",
     label: "Github",
     icon: <GithubIcon />,
   },
