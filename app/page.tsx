@@ -9,7 +9,7 @@ export default async function Page() {
   return (
     <>
       <Panel>
-        <PanelTitle>
+        <PanelTitle className="px-4">
           Welcome to the Interview Kit!
         </PanelTitle>
 
