@@ -13,7 +13,7 @@ export default async function Page() {
           Welcome to the Interview Kit!
         </PanelTitle>
 
-        <PanelTitleSup>
+        <PanelTitleSup className="px-3>
           Your one-stop solution for acing technical interviews.
         </PanelTitleSup>
 
