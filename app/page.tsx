@@ -14,7 +14,7 @@ export default async function Page() {
         </PanelTitle>
 
         <PanelTitleSup className="px-3>
-          Your one-stop solution for acing technical interviews.
+          Your one-stop solution for technical interviews.
         </PanelTitleSup>
 
         <div className="px-4 py-6 space-y-4">
