@@ -91,25 +91,6 @@ export function FilterDialog({
         </DialogHeader>
 
         <div className="space-y-4">
-          {/* Question Type */}
-          <div className="bg-muted/30 p-4 border border-border">
-            <h3 className="text-sm font-semibold text-foreground mb-3">Question Type</h3>
-            <div className="flex flex-wrap gap-2">
-              {types.map((type) => (
-                <Badge
-                  key={type}
-                  variant={filters.types.includes(type) ? "default" : "secondary"}
-                  className="cursor-pointer hover:opacity-80 transition-opacity"
-                  onClick={() => toggleFilter("types", type)}
-                >
-                  {type}
-                </Badge>
-              ))}
-            </div>
-          </div>
-
-          <Separator />
-
           {/* Difficulty */}
           <div className="bg-muted/30 p-4 border border-border">
             <h3 className="text-sm font-semibold text-foreground mb-3">Difficulty</h3>
@@ -127,28 +108,6 @@ export function FilterDialog({
                   onClick={() => toggleFilter("difficulties", difficulty)}
                 >
                   {difficulty}
-                </Badge>
-              ))}
-            </div>
-          </div>
-
-          <Separator />
-
-          {/* Companies */}
-          <div className="bg-primary/5 p-4 border border-primary/20">
-            <h3 className="text-sm font-semibold text-foreground mb-3">Companies</h3>
-            <div className="flex flex-wrap gap-2">
-              {availableFilters.companies.map((company) => (
-                <Badge
-                  key={company}
-                  variant={filters.companies.includes(company) ? "default" : "secondary"}
-                  className={cn(
-                    "cursor-pointer hover:opacity-80 transition-opacity",
-                    filters.companies.includes(company) && "bg-primary text-primary-foreground"
-                  )}
-                  onClick={() => toggleFilter("companies", company)}
-                >
-                  {company}
                 </Badge>
               ))}
             </div>
@@ -178,28 +137,9 @@ export function FilterDialog({
 
           <Separator />
 
-          {/* Topics */}
-          <div className="bg-muted/30 p-4 border border-border">
-            <h3 className="text-sm font-semibold text-foreground mb-3">Topics</h3>
-            <div className="flex flex-wrap gap-2">
-              {availableFilters.topics.map((topic) => (
-                <Badge
-                  key={topic}
-                  variant={filters.topics.includes(topic) ? "default" : "secondary"}
-                  className="cursor-pointer hover:opacity-80 transition-opacity"
-                  onClick={() => toggleFilter("topics", topic)}
-                >
-                  {topic}
-                </Badge>
-              ))}
-            </div>
-          </div>
-
-          <Separator />
-
           {/* Subjects */}
           <div className="bg-muted/30 p-4 border border-border">
-            <h3 className="text-sm font-semibold text-foreground mb-3">Subjects</h3>
+            <h3 className="text-sm font-semibold text-foreground mb-3">Language</h3>
             <div className="flex flex-wrap gap-2">
               {availableFilters.subjects.map((subject) => (
                 <Badge

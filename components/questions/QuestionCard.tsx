@@ -40,7 +40,6 @@ export function QuestionCard({
           <Badge variant="default" className={cn("border", getDifficultyColor(question.difficulty))}>
             {question.difficulty}
           </Badge>
-          <Badge variant="secondary">{question.type}</Badge>
         </div>
         <Button
           size="icon-sm"
@@ -57,11 +56,6 @@ export function QuestionCard({
 
       {/* Tags */}
       <div className="flex flex-wrap gap-2">
-        {question.companyTags.slice(0, 2).map((tag) => (
-          <Badge key={tag} variant="default" className="bg-primary/10 text-primary border-primary/20 dark:bg-primary/20">
-            {tag}
-          </Badge>
-        ))}
         {question.roleTags.slice(0, 1).map((tag) => (
           <Badge key={tag} variant="secondary">
             {tag}
