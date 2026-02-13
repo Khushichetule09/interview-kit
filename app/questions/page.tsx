@@ -35,11 +35,8 @@ export default function QuestionsPage() {
   const [showFilterDialog, setShowFilterDialog] = useState(false);
   const [showBookmarkedOnly, setShowBookmarkedOnly] = useState(false);
   const [filters, setFilters] = useState<FilterState>({
-    companies: [],
     roles: [],
-    topics: [],
     subjects: [],
-    types: [],
     difficulties: [],
   });
 
@@ -59,28 +56,21 @@ export default function QuestionsPage() {
 
   // Get available filter options from questions
   const availableFilters = useMemo(() => {
-    const companies = new Set<string>();
     const roles = new Set<string>();
-    const topics = new Set<string>();
     const subjects = new Set<string>();
 
     QUESTIONS.forEach((q) => {
-      q.companyTags.forEach((tag) => companies.add(tag));
       q.roleTags.forEach((tag) => roles.add(tag));
-      q.topicTags.forEach((tag) => topics.add(tag));
       q.subjectTags.forEach((tag) => subjects.add(tag));
     });
 
     return {
-      companies: Array.from(companies).sort(),
       roles: Array.from(roles).sort(),
-      topics: Array.from(topics).sort(),
       subjects: Array.from(subjects).sort(),
     };
   }, []);
 
   // Quick filters (displayed in main view)
-  const quickFilterTypes = ["Technical", "Behavioral", "Coding"];
   const quickFilterDifficulties = ["Easy", "Medium", "Hard"];
 
   // Filter and search questions
@@ -99,30 +89,17 @@ export default function QuestionsPage() {
         (q) =>
           q.question.toLowerCase().includes(query) ||
           q.answer.toLowerCase().includes(query) ||
-          q.companyTags.some((tag) => tag.toLowerCase().includes(query)) ||
           q.roleTags.some((tag) => tag.toLowerCase().includes(query)) ||
-          q.topicTags.some((tag) => tag.toLowerCase().includes(query)) ||
           q.subjectTags.some((tag) => tag.toLowerCase().includes(query))
       );
     }
 
     // Apply filters
-    if (filters.types.length > 0) {
-      result = result.filter((q) => filters.types.includes(q.type));
-    }
     if (filters.difficulties.length > 0) {
       result = result.filter((q) => filters.difficulties.includes(q.difficulty));
     }
-    if (filters.companies.length > 0) {
-      result = result.filter((q) =>
-        q.companyTags.some((tag) => filters.companies.includes(tag))
-      );
-    }
     if (filters.roles.length > 0) {
       result = result.filter((q) => q.roleTags.some((tag) => filters.roles.includes(tag)));
-    }
-    if (filters.topics.length > 0) {
-      result = result.filter((q) => q.topicTags.some((tag) => filters.topics.includes(tag)));
     }
     if (filters.subjects.length > 0) {
       result = result.filter((q) =>
@@ -157,24 +134,21 @@ export default function QuestionsPage() {
     setShowAnswerDialog(true);
   };
 
-  const toggleQuickFilter = (category: "types" | "difficulties", value: string) => {
+  const toggleQuickFilter = (category: "difficulties", value: string) => {
     const current = filters[category] as string[];
     const updated = current.includes(value)
       ? current.filter((v) => v !== value)
-      : [...current, value as never];
+      : [...current, value];
 
     setFilters({
       ...filters,
-      [category]: updated,
+      [category]: updated as any,
     });
   };
 
   const hasActiveFilters =
-    filters.companies.length > 0 ||
     filters.roles.length > 0 ||
-    filters.topics.length > 0 ||
     filters.subjects.length > 0 ||
-    filters.types.length > 0 ||
     filters.difficulties.length > 0;
 
   return (
@@ -192,7 +166,7 @@ export default function QuestionsPage() {
               <SearchIcon className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
               <Input
                 type="text"
-                placeholder="Search questions, tags, companies..."
+                placeholder="Search questions and tags..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-9 bg-background"
@@ -212,18 +186,7 @@ export default function QuestionsPage() {
 
           {/* Quick Filters */}
           <div className="flex flex-wrap gap-2 items-center bg-background p-3 border border-border">
-            <span className="text-xs font-semibold text-foreground">Type:</span>
-            {quickFilterTypes.map((type) => (
-              <Badge
-                key={type}
-                variant={filters.types.includes(type as never) ? "default" : "secondary"}
-                className="cursor-pointer hover:opacity-80 transition-opacity"
-                onClick={() => toggleQuickFilter("types", type)}
-              >
-                {type}
-              </Badge>
-            ))}
-            <span className="text-xs font-semibold text-foreground ml-2">Difficulty:</span>
+            <span className="text-xs font-semibold text-foreground">Difficulty:</span>
             {quickFilterDifficulties.map((difficulty) => (
               <Badge
                 key={difficulty}
@@ -249,11 +212,8 @@ export default function QuestionsPage() {
               All Filters
               {hasActiveFilters && (
                 <Badge variant="secondary" className="ml-1 px-1.5 text-xs bg-background text-foreground">
-                  {filters.companies.length +
-                    filters.roles.length +
-                    filters.topics.length +
+                  {filters.roles.length +
                     filters.subjects.length +
-                    filters.types.length +
                     filters.difficulties.length}
                 </Badge>
               )}

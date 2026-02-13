@@ -61,11 +61,6 @@ export function QuestionCard({
             {tag}
           </Badge>
         ))}
-        {question.topicTags.slice(0, 2).map((tag) => (
-          <Badge key={tag} variant="default" className="bg-accent text-accent-foreground">
-            {tag}
-          </Badge>
-        ))}
         {question.subjectTags.slice(0, 2).map((tag) => (
           <Badge key={tag} variant="default" className="bg-muted text-muted-foreground">
             {tag}

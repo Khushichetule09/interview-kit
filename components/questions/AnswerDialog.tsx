@@ -42,7 +42,6 @@ export function AnswerDialog({ question, open, onOpenChange }: AnswerDialogProps
             )}>
               {question.difficulty}
             </Badge>
-            <Badge variant="secondary">{question.type}</Badge>
           </div>
 
           {/* Question */}
@@ -65,16 +64,6 @@ export function AnswerDialog({ question, open, onOpenChange }: AnswerDialogProps
           <div>
             <h3 className="text-sm font-medium text-foreground mb-2">Tags</h3>
             <div className="space-y-2">
-              {question.companyTags.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                  <span className="text-xs font-semibold text-foreground min-w-20">Companies:</span>
-                  {question.companyTags.map((tag) => (
-                    <Badge key={tag} variant="default" className="text-xs bg-primary/10 text-primary border-primary/20 dark:bg-primary/20">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-              )}
               {question.roleTags.length > 0 && (
                 <div className="flex flex-wrap gap-2">
                   <span className="text-xs font-semibold text-foreground min-w-20">Roles:</span>
@@ -85,19 +74,9 @@ export function AnswerDialog({ question, open, onOpenChange }: AnswerDialogProps
                   ))}
                 </div>
               )}
-              {question.topicTags.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                  <span className="text-xs font-semibold text-foreground min-w-20">Topics:</span>
-                  {question.topicTags.map((tag) => (
-                    <Badge key={tag} variant="default" className="text-xs bg-accent text-accent-foreground">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-              )}
               {question.subjectTags.length > 0 && (
                 <div className="flex flex-wrap gap-2">
-                  <span className="text-xs font-semibold text-foreground min-w-20">Subjects:</span>
+                  <span className="text-xs font-semibold text-foreground min-w-20">Language:</span>
                   {question.subjectTags.map((tag) => (
                     <Badge key={tag} variant="default" className="text-xs bg-muted text-muted-foreground">
                       {tag}

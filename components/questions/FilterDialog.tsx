@@ -11,15 +11,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { QuestionDifficulty, QuestionType } from "@/types/question";
+import { QuestionDifficulty } from "@/types/question";
 import { cn } from "@/lib/utils";
 
 export interface FilterState {
-  companies: string[];
   roles: string[];
-  topics: string[];
   subjects: string[];
-  types: QuestionType[];
   difficulties: QuestionDifficulty[];
 }
 
@@ -29,9 +26,7 @@ interface FilterDialogProps {
   filters: FilterState;
   onFiltersChange: (filters: FilterState) => void;
   availableFilters: {
-    companies: string[];
     roles: string[];
-    topics: string[];
     subjects: string[];
   };
 }
@@ -60,24 +55,17 @@ export function FilterDialog({
 
   const clearAllFilters = () => {
     onFiltersChange({
-      companies: [],
       roles: [],
-      topics: [],
       subjects: [],
-      types: [],
       difficulties: [],
     });
   };
 
   const hasActiveFilters =
-    filters.companies.length > 0 ||
     filters.roles.length > 0 ||
-    filters.topics.length > 0 ||
     filters.subjects.length > 0 ||
-    filters.types.length > 0 ||
     filters.difficulties.length > 0;
 
-  const types: QuestionType[] = ["Behavioral", "Technical", "Coding"];
   const difficulties: QuestionDifficulty[] = ["Easy", "Medium", "Hard"];
 
   return (
