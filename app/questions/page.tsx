@@ -2,7 +2,6 @@
 
 import { useState, useMemo, useEffect } from "react";
 import { Panel, PanelHeader, PanelTitle } from "@/components/shared/Panel";
-import { Header } from "@/components/shared/Header";
 import Separator from "@/components/shared/Separator";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -22,7 +21,6 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { cn } from "@/lib/utils";
-import { Footer } from "@/components/shared/Footer";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -59,9 +57,9 @@ export default function QuestionsPage() {
     const roles = new Set<string>();
     const subjects = new Set<string>();
 
-    QUESTIONS.forEach((q) => {
-      q.roleTags.forEach((tag) => roles.add(tag));
-      q.subjectTags.forEach((tag) => subjects.add(tag));
+    QUESTIONS.forEach((q: Question) => {
+      q.roleTags.forEach((tag: string) => roles.add(tag));
+      q.subjectTags.forEach((tag: string) => subjects.add(tag));
     });
 
     return {
@@ -75,35 +73,35 @@ export default function QuestionsPage() {
 
   // Filter and search questions
   const filteredQuestions = useMemo(() => {
-    let result = QUESTIONS;
+    let result: Question[] = QUESTIONS;
 
     // Apply bookmark filter
     if (showBookmarkedOnly) {
-      result = result.filter((q) => bookmarkedIds.includes(q.id));
+      result = result.filter((q: Question) => bookmarkedIds.includes(q.id));
     }
 
     // Apply search
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
       result = result.filter(
-        (q) =>
+        (q: Question) =>
           q.question.toLowerCase().includes(query) ||
           q.answer.toLowerCase().includes(query) ||
-          q.roleTags.some((tag) => tag.toLowerCase().includes(query)) ||
-          q.subjectTags.some((tag) => tag.toLowerCase().includes(query))
+          q.roleTags.some((tag: string) => tag.toLowerCase().includes(query)) ||
+          q.subjectTags.some((tag: string) => tag.toLowerCase().includes(query))
       );
     }
 
     // Apply filters
     if (filters.difficulties.length > 0) {
-      result = result.filter((q) => filters.difficulties.includes(q.difficulty));
+      result = result.filter((q: Question) => filters.difficulties.includes(q.difficulty));
     }
     if (filters.roles.length > 0) {
-      result = result.filter((q) => q.roleTags.some((tag) => filters.roles.includes(tag)));
+      result = result.filter((q: Question) => q.roleTags.some((tag: string) => filters.roles.includes(tag)));
     }
     if (filters.subjects.length > 0) {
-      result = result.filter((q) =>
-        q.subjectTags.some((tag) => filters.subjects.includes(tag))
+      result = result.filter((q: Question) =>
+        q.subjectTags.some((tag: string) => filters.subjects.includes(tag))
       );
     }
 
@@ -135,14 +133,14 @@ export default function QuestionsPage() {
   };
 
   const toggleQuickFilter = (category: "difficulties", value: string) => {
-    const current = filters[category] as string[];
-    const updated = current.includes(value)
+    const current = filters[category];
+    const updated = current.includes(value as never)
       ? current.filter((v) => v !== value)
-      : [...current, value];
+      : [...current, value as never];
 
     setFilters({
       ...filters,
-      [category]: updated as any,
+      [category]: updated,
     });
   };
 
@@ -243,7 +241,7 @@ export default function QuestionsPage() {
               </p>
             </div>
           ) : (
-            paginatedQuestions.map((question) => (
+            paginatedQuestions.map((question: Question) => (
               <QuestionCard
                 key={question.id}
                 question={question}

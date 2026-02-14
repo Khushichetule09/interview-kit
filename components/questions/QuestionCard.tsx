@@ -22,9 +22,9 @@ export function QuestionCard({
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case "Easy":
-        return "bg-accent text-accent-foreground border-accent";
+        return "bg-emerald-500/10 text-emerald-500 border-emerald-500 dark:bg-emerald-500/20";
       case "Medium":
-        return "bg-primary text-primary-foreground border-primary";
+        return "bg-yellow-500/10 text-yellow-500 border-yellow-500 dark:bg-yellow-500/20";
       case "Hard":
         return "bg-destructive/10 text-destructive border-destructive dark:bg-destructive/20";
       default:
