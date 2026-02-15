@@ -242,28 +242,7 @@ export function AddQuestionDialog({
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* LEFT SIDE - Email, Question and Answer */}
-          <div className="space-y-4">
-            {/* Email - FIRST FIELD */}
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-sm font-semibold">
-                Email <span className="text-xs text-muted-foreground">(required for verification)</span>
-              </Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="your.email@example.com"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  setEmailError(""); // Clear error when user types
-                }}
-                className={cn(emailError && "border-red-500")}
-              />
-              {emailError && (
-                <p className="text-sm text-red-500">{emailError}</p>
-              )}
-            </div>
-
+          <div className="gap-4 h-full justify-between flex flex-col">
             {/* Question */}
             <div className="space-y-2">
               <Label htmlFor="question" className="text-sm font-semibold">
@@ -274,7 +253,7 @@ export function AddQuestionDialog({
                 placeholder="Enter your question here..."
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
-                className="min-h-28 resize-none"
+                className="min-h-32 resize-none"
               />
             </div>
 
@@ -321,7 +300,28 @@ export function AddQuestionDialog({
           </div>
 
           {/* RIGHT SIDE - Difficulty and Tags */}
-          <div className="space-y-4">
+          <div className="gap-4 h-full justify-between flex flex-col">
+
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-sm font-semibold">
+                Email <span className="text-xs text-muted-foreground">(required for verification)</span>
+              </Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="your.email@example.com"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setEmailError(""); // Clear error when user types
+                }}
+                className={cn(emailError && "border-red-500")}
+              />
+              {emailError && (
+                <p className="text-sm text-red-500">{emailError}</p>
+              )}
+            </div>
+
             {/* Difficulty */}
             <div className="space-y-3">
               <Label className="text-sm font-semibold">Difficulty</Label>
@@ -393,6 +393,7 @@ export function AddQuestionDialog({
                 </Button>
               </div>
               <SelectWithSearch
+              className="mb-0!"
                 items={availableFilters.subjects}
                 value={selectedSubjects}
                 onValueChange={(value) => setSelectedSubjects(value || [])}
