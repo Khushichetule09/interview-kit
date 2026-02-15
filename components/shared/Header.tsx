@@ -36,7 +36,7 @@ export function Header() {
       aria-label="Website top navigation"
       ref={navigationContainerRef}
     >
-      <div className="relative mx-auto flex max-w-7xl flex-col justify-between gap-x-5 px-5 md:flex-row lg:gap-x-9 lg:px-8">
+      <div className="relative mx-auto flex max-w-7xl flex-col justify-between gap-x-5 px-5 md:flex-row lg:gap-x-9 lg:px-8 ">
         {/* Logo and Toggle Mobile Nav Button */}
         <div className="flex items-center justify-between">
           {/* Replace with actual logo */}

@@ -30,14 +30,17 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="max-w-4xl mx-auto min-h-screen">
-            <Panel>
+          <div className="sticky top-0 z-50 bg-background border-b">
+            <Panel className="max-w-4xl mx-auto">
               <Header />
             </Panel>
-
-            <Separator />
+          </div>
+          <div className="max-w-4xl mx-auto min-h-screen">
+            
             {children}
-            <Panel><Footer /></Panel>
+            <Panel>
+              <Footer />
+            </Panel>
           </div>
         </ThemeProvider>
       </body>
