@@ -179,6 +179,6 @@ function ActionButtons() {
 }
 
 const NAV_ITEMS = [
-  { label: "Questions", href: "/questions" },
+  { label: "Questions", href: "/" },
   { label: "AI Chatbot", href: "/ai" }
 ];

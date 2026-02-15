@@ -8,6 +8,7 @@ import { Footer } from "@/components/shared/Footer";
 import { Panel } from "@/components/shared/Panel";
 import { Header } from "@/components/shared/Header";
 import Separator from "@/components/shared/Separator";
+import { Toaster } from "sileo";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -36,12 +37,11 @@ export default async function RootLayout({
             </Panel>
           </div>
           <div className="max-w-4xl mx-auto min-h-screen">
-            
             {children}
+            <Toaster position="bottom-right" />
             <Panel>
               <Footer />
             </Panel>
-
             <Separator />
           </div>
         </ThemeProvider>

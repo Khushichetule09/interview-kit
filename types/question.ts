@@ -1,4 +1,5 @@
 export type QuestionDifficulty = "Easy" | "Medium" | "Hard";
+export type QuestionStatus = "drafted" | "approved" | "rejected";
 
 export interface Question {
   id: string;
@@ -7,4 +8,8 @@ export interface Question {
   difficulty: QuestionDifficulty;
   roleTags: string[];
   subjectTags: string[];
+  email?: string;
+  status?: QuestionStatus;
+  created_at?: string;
+  updated_at?: string;
 }
