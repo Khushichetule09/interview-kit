@@ -10,7 +10,10 @@ import {
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
+import { Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 interface AnswerDialogProps {
   question: Question | null;
@@ -19,7 +22,15 @@ interface AnswerDialogProps {
 }
 
 export function AnswerDialog({ question, open, onOpenChange }: AnswerDialogProps) {
+  const router = useRouter();
+
   if (!question) return null;
+
+  const handleAskAI = () => {
+    sessionStorage.setItem("initial_message", `Answer to the question: ${question.question}`);
+    onOpenChange(false);
+    router.push("/ai");
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -85,6 +96,19 @@ export function AnswerDialog({ question, open, onOpenChange }: AnswerDialogProps
                 </div>
               )}
             </div>
+          </div>
+
+          {/* Ask AI Button */}
+          <div className="flex justify-end pt-2">
+            <Button
+              size="sm"
+              variant="default"
+              onClick={handleAskAI}
+              className="gap-1.5"
+            >
+              <Sparkles className="size-3.5" />
+              Ask AI
+            </Button>
           </div>
         </div>
       </DialogContent>

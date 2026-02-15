@@ -10,9 +10,11 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { QuestionDifficulty } from "@/types/question";
 import { cn } from "@/lib/utils";
+import Separator from "../shared/Separator";
+import { Panel } from "../shared/Panel";
+import { SelectWithSearch } from "./SelectWithSearch";
 
 export interface FilterState {
   roles: string[];
@@ -70,17 +72,17 @@ export function FilterDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-3xl! max-h-[80vh] overflow-y-auto">
+      <DialogContent className="max-w-3xl! max-h-[80vh] overflow-y-auto overflow-x-hidden">
         <DialogHeader>
           <DialogTitle className="text-base font-semibold">All Filters</DialogTitle>
-          <DialogDescription className="sr-only">
+          <DialogDescription>
             Filter questions by various criteria
           </DialogDescription>
         </DialogHeader>
 
-        <div className="space-y-4">
+        <div className="overflow-x-hidden">
           {/* Difficulty */}
-          <div className="bg-muted/30 p-4 border border-border">
+          <Panel className="bg-muted/30 p-4 border border-border">
             <h3 className="text-sm font-semibold text-foreground mb-3">Difficulty</h3>
             <div className="flex flex-wrap gap-2">
               {difficulties.map((difficulty) => (
@@ -89,9 +91,9 @@ export function FilterDialog({
                   variant={filters.difficulties.includes(difficulty) ? "default" : "secondary"}
                   className={cn(
                     "cursor-pointer hover:opacity-80 transition-opacity",
-                    filters.difficulties.includes(difficulty) && difficulty === "Easy" && "bg-accent text-accent-foreground",
-                    filters.difficulties.includes(difficulty) && difficulty === "Medium" && "bg-primary text-primary-foreground",
-                    filters.difficulties.includes(difficulty) && difficulty === "Hard" && "bg-destructive text-destructive-foreground"
+                    filters.difficulties.includes(difficulty) && difficulty === "Easy" && "bg-emerald-400 text-black",
+                    filters.difficulties.includes(difficulty) && difficulty === "Medium" && "bg-yellow-400 text-black",
+                    filters.difficulties.includes(difficulty) && difficulty === "Hard" && "bg-red-400 text-black"
                   )}
                   onClick={() => toggleFilter("difficulties", difficulty)}
                 >
@@ -99,28 +101,21 @@ export function FilterDialog({
                 </Badge>
               ))}
             </div>
-          </div>
+          </Panel>
 
           <Separator />
 
           {/* Roles */}
           <div className="bg-accent/20 p-4 border border-accent/40">
             <h3 className="text-sm font-semibold text-foreground mb-3">Roles</h3>
-            <div className="flex flex-wrap gap-2">
-              {availableFilters.roles.map((role) => (
-                <Badge
-                  key={role}
-                  variant={filters.roles.includes(role) ? "default" : "secondary"}
-                  className={cn(
-                    "cursor-pointer hover:opacity-80 transition-opacity",
-                    filters.roles.includes(role) && "bg-accent text-accent-foreground"
-                  )}
-                  onClick={() => toggleFilter("roles", role)}
-                >
-                  {role}
-                </Badge>
-              ))}
-            </div>
+            <SelectWithSearch
+              items={availableFilters.roles}
+              value={filters.roles}
+              onValueChange={(value) => onFiltersChange({ ...filters, roles: value || [] })}
+              placeholder="Search and select roles..."
+              emptyMessage="No roles found"
+              maxSelections={999}
+            />
           </div>
 
           <Separator />
@@ -128,18 +123,14 @@ export function FilterDialog({
           {/* Subjects */}
           <div className="bg-muted/30 p-4 border border-border">
             <h3 className="text-sm font-semibold text-foreground mb-3">Language</h3>
-            <div className="flex flex-wrap gap-2">
-              {availableFilters.subjects.map((subject) => (
-                <Badge
-                  key={subject}
-                  variant={filters.subjects.includes(subject) ? "default" : "secondary"}
-                  className="cursor-pointer hover:opacity-80 transition-opacity"
-                  onClick={() => toggleFilter("subjects", subject)}
-                >
-                  {subject}
-                </Badge>
-              ))}
-            </div>
+            <SelectWithSearch
+              items={availableFilters.subjects}
+              value={filters.subjects}
+              onValueChange={(value) => onFiltersChange({ ...filters, subjects: value || [] })}
+              placeholder="Search and select languages..."
+              emptyMessage="No languages found"
+              maxSelections={999}
+            />
           </div>
         </div>
 

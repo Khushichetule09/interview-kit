@@ -1,7 +1,7 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
-import { useRef, useState } from "react";
+import { Menu, X, Plus } from "lucide-react";
+import { useRef, useState, useMemo } from "react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -10,6 +10,9 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { PlaceholderLogo } from "@/components/ui/placeholder-logo";
 import Link from "next/link";
 import { ModeToggle } from "../ui/mode-toggle";
+import { AddQuestionDialog } from "../questions/AddQuestionDialog";
+import { QUESTIONS } from "@/constants/questions";
+import { Question } from "@/types/question";
 
 // Defaults to Tailwind's md: breakpoint.
 // Change to 1024 + use lg: classes for 1024px breakpoint or whatever breakpoint you want to use
@@ -73,7 +76,7 @@ export function Header() {
                   key={item.label}
                   href={item.href}
                   className={cn(
-                    "rounded-md px-4 py-2 text-sm font-medium transition-colors hover:text-foreground text-foreground/70",
+                    "px-4 py-2 text-sm font-medium transition-colors hover:text-foreground text-foreground/70",
                     isActive && "bg-accent text-accent-foreground"
                   )}
                 >
@@ -112,7 +115,7 @@ export function Header() {
                       key={item.label}
                       href={item.href}
                       className={cn(
-                        "rounded-md px-2 py-3.5 text-base font-medium transition-colors hover:bg-accent/50 hover:text-accent-foreground",
+                        "px-2 py-3.5 text-base font-medium transition-colors hover:bg-accent/50 hover:text-accent-foreground",
                         isActive && "bg-accent text-accent-foreground"
                       )}
                       onClick={() => setIsMenuOpen(false)}
@@ -133,10 +136,45 @@ export function Header() {
 }
 
 function ActionButtons() {
+  const [showAddQuestionDialog, setShowAddQuestionDialog] = useState(false);
+
+  // Get available filter options from questions
+  const availableFilters = useMemo(() => {
+    const roles = new Set<string>();
+    const subjects = new Set<string>();
+
+    QUESTIONS.forEach((q: Question) => {
+      q.roleTags.forEach((tag: string) => roles.add(tag));
+      q.subjectTags.forEach((tag: string) => subjects.add(tag));
+    });
+
+    return {
+      roles: Array.from(roles).sort(),
+      subjects: Array.from(subjects).sort(),
+    };
+  }, []);
+
   return (
-    <div className="flex flex-col gap-2 md:flex-row">
-      <ModeToggle />
-    </div>
+    <>
+      <div className="flex flex-col gap-2 md:flex-row">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => setShowAddQuestionDialog(true)}
+          className="gap-1.5"
+        >
+          <Plus className="size-4" />
+          Add Question
+        </Button>
+        <ModeToggle />
+      </div>
+      
+      <AddQuestionDialog
+        open={showAddQuestionDialog}
+        onOpenChange={setShowAddQuestionDialog}
+        availableFilters={availableFilters}
+      />
+    </>
   );
 }
 

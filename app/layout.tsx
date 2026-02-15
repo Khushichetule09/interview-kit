@@ -20,7 +20,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark overflow-x-hidden">
+    <html lang="en" className="dark overflow-x-hidden w-full">
       <body
         className={`${GeistSans.variable} ${GeistMono.variable} ${GeistPixelTriangle.variable}`}
       >
@@ -30,7 +30,7 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="sticky top-0 z-50 bg-background border-b">
+          <div className="fixed top-0 z-50 bg-background border-b w-full">
             <Panel className="max-w-4xl mx-auto">
               <Header />
             </Panel>
@@ -41,6 +41,8 @@ export default async function RootLayout({
             <Panel>
               <Footer />
             </Panel>
+
+            <Separator />
           </div>
         </ThemeProvider>
       </body>

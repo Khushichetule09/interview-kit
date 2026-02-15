@@ -5,7 +5,7 @@ import Separator from "@/components/shared/Separator";
 export default function AIPage() {
   return (
     <>
-    <Panel>
+    <Panel className="pt-16">
       <Chatbot />
     </Panel>
     <Separator/>

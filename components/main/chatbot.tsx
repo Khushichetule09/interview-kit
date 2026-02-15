@@ -48,19 +48,20 @@ export default function Chatbot({
   initialMessages?: UIMessage[];
 }) {
   const initialMessageSentRef = useRef(false);
-  const {theme} = useTheme();
+  const { theme } = useTheme();
   console.log("Current theme in Chatbot:", theme);
-  const { status, messages, sendMessage, regenerate } = useChat()
+  const { status, messages, sendMessage, regenerate } = useChat();
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleSubmit = useCallback(
     (message: PromptInputMessage) => {
-    if (!message.text || status === "streaming" || status === "submitted")
-      return;
-    sendMessage({ text: message.text });
-  }, [sendMessage, status]);
-
+      if (!message.text || status === "streaming" || status === "submitted")
+        return;
+      sendMessage({ text: message.text });
+    },
+    [sendMessage, status],
+  );
 
   useEffect(() => {
     if (
@@ -112,9 +113,9 @@ export default function Chatbot({
                         <Fragment key={`${message.id}-${i}`}>
                           <Message from={message.role}>
                             <MessageContent>
-                              <MessageResponse
-                                theme={theme}
-                              >{part.text}</MessageResponse>
+                              <MessageResponse theme={theme}>
+                                {part.text}
+                              </MessageResponse>
                             </MessageContent>
                           </Message>
                           {message.role === "assistant" && isLastMessage && (
@@ -170,9 +171,8 @@ export default function Chatbot({
         </ConversationContent>
         <ConversationScrollButton />
       </Conversation>
-      
-      <div className="grid shrink-0 gap-4">
 
+      <div className="grid shrink-0 gap-4">
         <div className="mx-auto w-full max-w-2xl px-2 py-2">
           <div className="shadow-primary/20 shadow-2xl relative">
             <div className="flex flex-col border bg-linear-to-b from-secondary/40 to-background p-2 relative overflow-hidden">
@@ -194,12 +194,6 @@ export default function Chatbot({
                   </PromptInputBody>
                   <PromptInputFooter className="p-0!">
                     <PromptInputTools>
-                      <PromptInputActionMenu>
-                        <PromptInputActionMenuTrigger />
-                        <PromptInputActionMenuContent>
-                          <PromptInputActionAddAttachments />
-                        </PromptInputActionMenuContent>
-                      </PromptInputActionMenu>
                       <PromptInputSpeechButton textareaRef={textareaRef} />
                     </PromptInputTools>
 

@@ -3,8 +3,9 @@
 import { Question } from "@/types/question";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { EyeIcon, BookmarkIcon } from "lucide-react";
+import { EyeIcon, BookmarkIcon, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 interface QuestionCardProps {
   question: Question;
@@ -19,6 +20,8 @@ export function QuestionCard({
   onToggleBookmark,
   onViewAnswer,
 }: QuestionCardProps) {
+  const router = useRouter();
+
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case "Easy":
@@ -30,6 +33,11 @@ export function QuestionCard({
       default:
         return "bg-muted text-muted-foreground border-muted";
     }
+  };
+
+  const handleAskAI = () => {
+    sessionStorage.setItem("initial_message", `Answer to the question: ${question.question}`);
+    router.push("/ai");
   };
 
   return (
@@ -69,7 +77,16 @@ export function QuestionCard({
       </div>
 
       {/* View Answer Button */}
-      <div className="flex justify-end">
+      <div className="flex justify-end gap-2">
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={handleAskAI}
+          className="gap-1.5"
+        >
+          <Sparkles className="size-3.5" />
+          Ask AI
+        </Button>
         <Button
           size="sm"
           variant="default"

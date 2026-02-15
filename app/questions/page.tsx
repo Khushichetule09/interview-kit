@@ -151,7 +151,7 @@ export default function QuestionsPage() {
 
   return (
     <>
-      <Panel>
+      <Panel className="pt-16">
         <PanelHeader className="py-4">
           <PanelTitle>Interview Questions</PanelTitle>
         </PanelHeader>
@@ -191,9 +191,9 @@ export default function QuestionsPage() {
                 variant={filters.difficulties.includes(difficulty as never) ? "default" : "secondary"}
                 className={cn(
                   "cursor-pointer hover:opacity-80 transition-opacity",
-                  filters.difficulties.includes(difficulty as never) && difficulty === "Easy" && "bg-accent text-accent-foreground",
-                  filters.difficulties.includes(difficulty as never) && difficulty === "Medium" && "bg-primary text-primary-foreground",
-                  filters.difficulties.includes(difficulty as never) && difficulty === "Hard" && "bg-destructive text-destructive-foreground"
+                  filters.difficulties.includes(difficulty as never) && difficulty === "Easy" && "bg-emerald-400 text-black",
+                    filters.difficulties.includes(difficulty as never) && difficulty === "Medium" && "bg-yellow-400 text-black",
+                    filters.difficulties.includes(difficulty as never) && difficulty === "Hard" && "bg-red-400 text-black"
                 )}
                 onClick={() => toggleQuickFilter("difficulties", difficulty)}
               >
