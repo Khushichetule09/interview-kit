@@ -4,6 +4,11 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+::selection {
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+}
+
 * {
   outline: none;
 }

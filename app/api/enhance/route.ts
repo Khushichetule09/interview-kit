@@ -33,7 +33,6 @@ Rules:
 Original content: ${content}
 
 Provide only the enhanced answer, nothing else.`,
-      maxTokens: 200,
     });
 
     // Ensure it stays short

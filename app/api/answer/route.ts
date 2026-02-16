@@ -32,7 +32,6 @@ Rules:
 Question: ${question}
 
 Provide only the answer, nothing else.`,
-      maxTokens: 200,
     });
 
     // Further shorten if still too long
