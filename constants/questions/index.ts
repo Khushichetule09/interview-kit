@@ -1,5 +1,6 @@
 import { Question } from "@/types/question";
 import { REACT_QUESTIONS } from "./react";
+import { JAVASCRIPT_QUESTIONS } from "./javascript";
 import { DSA_QUESTIONS } from "./dsa";
 import { OS_QUESTIONS } from "./os";
 import { DBMS_QUESTIONS } from "./dbms";
@@ -9,6 +10,7 @@ import { BEHAVIORAL_QUESTIONS } from "./behavioral";
 // Combined questions array
 export const ALL_QUESTIONS: Question[] = [
   ...REACT_QUESTIONS,
+  ...JAVASCRIPT_QUESTIONS,
   ...DSA_QUESTIONS,
   ...OS_QUESTIONS,
   ...DBMS_QUESTIONS,
@@ -22,6 +24,7 @@ export const QUESTIONS = ALL_QUESTIONS;
 // Export individual question sets for specific use cases
 export {
   REACT_QUESTIONS,
+  JAVASCRIPT_QUESTIONS,
   DSA_QUESTIONS,
   OS_QUESTIONS,
   DBMS_QUESTIONS,

@@ -4,6 +4,7 @@
 
 import type { Question } from "@/types/question";
 import { REACT_QUESTIONS } from "./questions/react";
+import { JAVASCRIPT_QUESTIONS } from "./questions/javascript";
 import { DSA_QUESTIONS } from "./questions/dsa";
 import { OS_QUESTIONS } from "./questions/os";
 import { DBMS_QUESTIONS } from "./questions/dbms";
@@ -13,6 +14,7 @@ import { BEHAVIORAL_QUESTIONS } from "./questions/behavioral";
 // Combined questions array
 const ALL_QUESTIONS: Question[] = [
   ...REACT_QUESTIONS,
+  ...JAVASCRIPT_QUESTIONS,
   ...DSA_QUESTIONS,
   ...OS_QUESTIONS,
   ...DBMS_QUESTIONS,
@@ -27,6 +29,7 @@ export const QUESTIONS = ALL_QUESTIONS;
 export {
   ALL_QUESTIONS,
   REACT_QUESTIONS,
+  JAVASCRIPT_QUESTIONS,
   DSA_QUESTIONS,
   OS_QUESTIONS,
   DBMS_QUESTIONS,
