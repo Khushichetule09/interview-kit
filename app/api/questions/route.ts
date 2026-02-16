@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/server";
-import { cookies } from "next/headers";
 import { nanoid } from "nanoid";
 
 export async function POST(request: NextRequest) {
@@ -16,8 +15,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const cookieStore = await cookies();
-    const supabase = createClient(cookieStore);
+    const supabase = await createClient();
 
     // Insert question into Supabase
     const { data, error } = await supabase
@@ -58,8 +56,7 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const status = searchParams.get("status");
 
-    const cookieStore = await cookies();
-    const supabase = createClient(cookieStore);
+    const supabase = await createClient();
     
     let query = supabase.from("questions").select("*").order("created_at", { ascending: false });
 

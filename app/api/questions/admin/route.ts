@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/server";
-import { cookies } from "next/headers";
 
 export async function POST(request: NextRequest) {
   try {
@@ -22,8 +21,7 @@ export async function POST(request: NextRequest) {
 
     const newStatus = action === "approve" ? "approved" : "rejected";
 
-    const cookieStore = await cookies();
-    const supabase = createClient(cookieStore);
+    const supabase = await createClient();
 
     const { data, error } = await supabase
       .from("questions")
